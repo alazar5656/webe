@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Channel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background-color: #fff;
+            height: 56px; /* Standard YouTube header height */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100; /* Ensure header is on top */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-left,
+        .header-center,
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left .menu-icon,
+        .header-left .youtube-logo img,
+        .mic-icon,
+        .header-right div {
+            padding: 0 8px; /* Adjust spacing */
+            cursor: pointer;
+        }
+
+        .youtube-logo {
+            display: flex; /* Use flexbox to align image and text */
+            align-items: center;
+        }
+
+        .youtube-logo img {
+            height: 20px;
+            margin-right: 5px; /* Space between logo and text */
+        }
+
+        .youtube-logo span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #282828; /* Dark grey color for text */
+        }
+
+        .header-center {
+            flex-grow: 1;
+            max-width: 650px; /* Limit search bar width */
+        }
+
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-left: 40px; /* Space from logo */
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar .search-clear {
+             padding: 0 10px; /* Space for clear icon */
+             display: none; /* Hide by default */
+             align-items: center;
+             cursor: pointer;
+        }
+
+        .search-bar .search-button {
+            padding: 0 20px;
+            background-color: #f8f8f8;
+            border: none;
+            border-left: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .mic-icon {
+            margin-left: 10px; /* Space from search bar */
+        }
+
+        .header-right .more-icon,
+        .header-right .sign-in-button {
+            margin-left: 10px; /* Space between elements */
+        }
+
+        .sign-in-button {
+            background-color: transparent;
+            color: #065fd4; /* YouTube blue color */
+            border: 1px solid #065fd4;
+            border-radius: 20px; /* Rounded corners */
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .sign-in-button i {
+            margin-right: 5px; /* Space between icon and text */
+            color: #065fd4; /* Ensure icon color is blue */
+        }
+
+        .container {
+            display: flex;
+            padding-top: 56px; /* Offset for fixed header */
+        }
+
+        .sidebar {
+            width: 240px; /* Standard YouTube sidebar width */
+            background-color: #fff;
+            padding-top: 20px;
+            height: calc(100vh - 56px); /* Full height minus header */
+            position: fixed; /* Keep sidebar fixed */
+            left: 0;
+            top: 56px; /* Position below header */
+            overflow-y: auto; /* Enable scrolling for long content */
+            box-shadow: 1px 0 3px rgba(0,0,0,0.1);
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #030303;
+            display: flex; /* Use flexbox for icon and text alignment */
+            align-items: center;
+        }
+
+        .sidebar li a {
+            text-decoration: none;
+            color: #030303;
+            display: flex; /* Use flexbox for icon and text alignment */
+            align-items: center;
+            width: 100%; /* Make the link take full width */
+        }
+
+         .sidebar li:hover {
+            background-color: #f2f2f2;
+        }
+
+        .sidebar hr {
+            border: none;
+            border-top: 1px solid #e5e5e5;
+            margin: 10px 0;
+        }
+
+        .sidebar li i {
+            margin-right: 15px; /* Space between icon and text */
+            width: 24px; /* Ensure consistent icon spacing */
+            text-align: center; /* Center icon */
+            color: #606060; /* Set icon color */
+        }
+
+        .main-content {
+            margin-left: 240px; /* Offset for fixed sidebar */
+            flex-grow: 1;
+            padding-top: 20px; /* Add some space below the fixed header */
+        }
+
+        .channel-header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .channel-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .channel-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .channel-details h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .channel-description {
+            font-size: 14px;
+            color: #606060; /* YouTube's standard grey text color */
+            margin-bottom: 10px; /* Space between description and stats */
+        }
+
+        .channel-stats {
+            display: flex;
+            gap: 20px;
+            color: #606060;
+            font-size: 14px;
+        }
+
+        .subscribe-btn {
+            background-color: #080808;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px; /* Make the button round */
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .channel-tabs {
+            max-width: 1200px;
+            margin: 20px auto;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 0 20px; /* Add padding to align with content */
+             display: flex; /* Use flexbox for tabs layout */
+             align-items: center; /* Vertically align items */
+        }
+
+        .channel-tabs .tab {
+            display: inline-block;
+            padding: 10px 0px; /* Adjust padding */
+            margin-right: 20px; /* Space between tabs */
+            color: #606060;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #030303;
+            border-bottom: 2px solid #030303;
+        }
+
+        .channel-tabs .search-icon {
+            margin-left: auto; /* Push search icon to the right */
+             padding: 0 8px;
+             cursor: pointer;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .video-meta {
+            color: #606060;
+            font-size: 14px;
+        }
+
+        .about-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .about-section h2 {
+            margin-bottom: 15px;
+        }
+
+        .about-section p {
+            color: #606060;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-left">
+            <div class="menu-icon"><i class="fas fa-bars"></i></div>
+            <div class="youtube-logo">
+                <img src="image/download (1).png" alt="YouTube Logo">
+                <span>YouTube</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <div class="search-clear"><i class="fas fa-times-circle"></i></div>
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="mic-icon"><i class="fas fa-microphone"></i></div>
+        </div>
+        <div class="header-right">
+            <div class="more-icon"><i class="fas fa-ellipsis-v"></i></div>
+            <button class="sign-in-button"><i class="fas fa-user-circle"></i> Sign in</button>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#"><i class="fas fa-play-circle"></i>Shorts</a></li>
+                <li><a href="#"><i class="fas fa-youtube"></i>Subscriptions</a></li>
+                <hr>
+                <li><a href="#"><i class="fas fa-user"></i>You</a></li>
+                <li><a href="#"><i class="fas fa-history"></i>History</a></li>
+                <li><a href="#"><i class="fas fa-bars"></i>Playlists</a></li>
+                <li><a href="#"><i class="fas fa-video"></i>Your videos</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i>Watch later</a></li>
+                <li><a href="#"><i class="fas fa-thumbs-up"></i>Liked videos</a></li>
+                <hr>
+                <li>Subscriptions</li>
+                <li><a href="#"><i class="fas fa-user-circle"></i>PixelArtistry</a></li>
+                <li><a href="#"><i class="fas fa-user-circle"></i>AI Search</a></li>
+                <li><a href="#"><i class="fas fa-user-circle"></i>GothamChess</a></li>
+                <li><a href="#"><i class="fas fa-user-circle"></i>AxisAgile Apps</a></li>
+                <li><a href="#"><i class="fas fa-user-circle"></i>Tech With Tim</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <header class="channel-header">
+                <div class="channel-info">
+                    <img src="image/png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper-thumbnail (1).png" alt="Channel Avatar" class="channel-avatar">
+                    <div class="channel-details">
+                        <h1>Channel Name</h1>
+                        <p class="channel-description">This is a placeholder for the channel description. It can be a short summary of the channel's content.</p>
+                        <div class="channel-stats">
+                            <span>1.2M subscribers</span>
+                            <span>500 videos</span>
+                        </div>
+                    </div>
+                    <button class="subscribe-btn">Subscribe</button>
+                </div>
+            </header>
+
+            <div class="channel-tabs">
+                <div class="tab active">Home</div>
+                <div class="tab">Shorts</div>
+                <div class="tab">Playlists</div>
+            </div>
+
+            <main class="content-container">
+                <div class="video-grid">
+                    <!-- Video Card 1 -->
+                    <div class="video-card">
+                        <img src="image/download.png" alt="Video Thumbnail" class="video-thumbnail">
+                        <div class="video-info">
+                            <h3 class="video-title">Amazing Video Title Goes Here</h3>
+                            <div class="video-meta">
+                                <div>1.2M views • 2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card">
+                        <img src="image/download.png" alt="Video Thumbnail" class="video-thumbnail">
+                        <div class="video-info">
+                            <h3 class="video-title">Another Great Video Title</h3>
+                            <div class="video-meta">
+                                <div>800K views • 1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="video-card">
+                        <img src="image/download.png" alt="Video Thumbnail" class="video-thumbnail">
+                        <div class="video-info">
+                            <h3 class="video-title">Check Out This Awesome Content</h3>
+                            <div class="video-meta">
+                                <div>500K views • 2 weeks ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 4 -->
+                    <div class="video-card">
+                        <img src="image/download.png" alt="Video Thumbnail" class="video-thumbnail">
+                        <div class="video-info">
+                            <h3 class="video-title">Latest Upload - Must Watch!</h3>
+                            <div class="video-meta">
+                                <div>300K views • 3 weeks ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>About</h2>
+                    <p>Welcome to my channel! I create content about [your topic]. Subscribe to stay updated with the latest videos and join our growing community.</p>
+                    <br>
+                    <p>Join me on social media:</p>
+                    <p>Twitter: @channelname</p>
+                    <p>Instagram: @channelname</p>
+                    <p>Facebook: /channelname</p>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
