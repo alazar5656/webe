@@ -3,902 +3,733 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Channel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Digital Library - Discover Knowledge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
         body {
-            background-color: #f9f9f9;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
         }
 
-        .site-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            background-color: #fff;
-            height: 56px; /* Standard YouTube header height */
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100; /* Ensure header is on top */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
 
-        .header-left,
-        .header-center,
-        .header-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-left .menu-icon,
-        .header-left .youtube-logo img,
-        .mic-icon,
-        .header-right div {
-            padding: 0 8px; /* Adjust spacing */
-            cursor: pointer;
-        }
-
-        .youtube-logo {
-            display: flex; /* Use flexbox to align image and text */
-            align-items: center;
-        }
-
-        .youtube-logo img {
-            height: 20px;
-            margin-right: 5px; /* Space between logo and text */
-        }
-
-        .youtube-logo span {
-            font-size: 18px;
-            font-weight: bold;
-            color: #282828; /* Dark grey color for text */
-        }
-
-        .header-center {
-            flex-grow: 1;
-            max-width: 650px; /* Limit search bar width */
-        }
-
-        .search-bar {
-            display: flex;
-            flex-grow: 1;
-            border: 1px solid #ccc;
-            border-radius: 40px;
-            overflow: hidden;
-            margin-left: 40px; /* Space from logo */
-        }
-
-        .search-bar input {
-            flex-grow: 1;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .search-bar .search-clear {
-             padding: 0 10px; /* Space for clear icon */
-             display: none; /* Hide by default */
-             align-items: center;
-             cursor: pointer;
-        }
-
-        .search-bar .search-button {
-            padding: 0 20px;
-            background-color: #f8f8f8;
-            border: none;
-            border-left: 1px solid #ccc;
-            cursor: pointer;
-        }
-
-        .mic-icon {
-            margin-left: 10px; /* Space from search bar */
-        }
-
-        .header-right .more-icon,
-        .header-right .sign-in-button {
-            margin-left: 10px; /* Space between elements */
-        }
-
-        .sign-in-button {
-            background-color: transparent;
-            color: #065fd4; /* YouTube blue color */
-            border: 1px solid #065fd4;
-            border-radius: 20px; /* Rounded corners */
-            padding: 8px 15px;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-
-        .sign-in-button i {
-            margin-right: 5px; /* Space between icon and text */
-            color: #065fd4; /* Ensure icon color is blue */
-        }
-
-        .container {
-            display: flex;
-            padding-top: 56px; /* Offset for fixed header */
-        }
-
-        .sidebar {
-            width: 240px; /* Standard YouTube sidebar width */
-            background-color: #fff;
-            padding-top: 20px;
-            height: calc(100vh - 56px); /* Full height minus header */
-            position: fixed; /* Keep sidebar fixed */
-            left: 0;
-            top: 56px; /* Position below header */
-            overflow-y: auto; /* Enable scrolling for long content */
-            box-shadow: 1px 0 3px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease; /* Smooth slide animation */
-            z-index: 50; /* Ensure sidebar is above content on mobile */
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar li {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #030303;
-            display: flex; /* Use flexbox for icon and text alignment */
-            align-items: center;
-        }
-
-        .sidebar li a {
-            text-decoration: none;
-            color: #030303;
-            display: flex; /* Use flexbox for icon and text alignment */
-            align-items: center;
-            width: 100%; /* Make the link take full width */
-        }
-
-         .sidebar li:hover {
-            background-color: #f2f2f2;
-        }
-
-        .sidebar hr {
-            border: none;
-            border-top: 1px solid #e5e5e5;
-            margin: 10px 0;
-        }
-
-        .sidebar li i {
-            margin-right: 15px; /* Space between icon and text */
-            width: 24px; /* Ensure consistent icon spacing */
-            text-align: center; /* Center icon */
-            color: #606060; /* Set icon color */
-        }
-
-        .main-content {
-            margin-left: 240px; /* Offset for fixed sidebar */
-            flex-grow: 1;
-            padding-top: 20px; /* Add some space below the fixed header */
-            transition: margin-left 0.3s ease; /* Smooth transition when sidebar toggles */
-        }
-
-        .channel-header {
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .channel-info {
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            height: 70px;
         }
 
-        .channel-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .channel-details h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .channel-description {
-            font-size: 14px;
-            color: #606060; /* YouTube's standard grey text color */
-            margin-bottom: 10px; /* Space between description and stats */
-        }
-
-        .channel-stats {
+        .logo {
             display: flex;
-            gap: 20px;
-            color: #606060;
-            font-size: 14px;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .subscribe-btn {
-            background-color: #080808;
-            color: white;
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
             border: none;
-            padding: 10px 20px;
-            border-radius: 20px; /* Make the button round */
-            cursor: pointer;
+            border-radius: 0.5rem;
             font-weight: 500;
-        }
-
-        .channel-tabs {
-            max-width: 1200px;
-            margin: 20px auto;
-            border-bottom: 1px solid #e5e5e5;
-            padding: 0 20px; /* Add padding to align with content */
-             display: flex; /* Use flexbox for tabs layout */
-             align-items: center; /* Vertically align items */
-        }
-
-        .channel-tabs .tab {
-            display: inline-block;
-            padding: 10px 0px; /* Adjust padding */
-            margin-right: 20px; /* Space between tabs */
-            color: #606060;
+            text-decoration: none;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .tab.active {
-            color: #030303;
-            border-bottom: 2px solid #030303;
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
         }
 
-        .channel-tabs .search-icon {
-            margin-left: auto; /* Push search icon to the right */
-             padding: 0 8px;
-             cursor: pointer;
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
 
-        .content-container {
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            padding: 140px 2rem 100px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
+            margin: 0 auto;
         }
 
-        .video-grid {
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .view-all:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .video-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .video-thumbnail {
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-image {
             width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
+            height: 200px;
+            background: var(--gradient-secondary);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
         }
 
-        .video-info {
-            padding: 12px;
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
-        .video-title {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
-        .video-meta {
-            color: #606060;
-            font-size: 14px;
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
-        .about-section {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
         }
 
-        .about-section h2 {
-            margin-bottom: 15px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
         }
 
-        .about-section p {
-            color: #606060;
-            line-height: 1.5;
+        .stat-item {
+            padding: 1.5rem;
         }
 
-        /* Active states for navigation */
-        .sidebar li.active {
-            background-color: #f2f2f2;
-            border-right: 3px solid #ff0000; /* YouTube red accent */
-        }
-
-        .sidebar li.active i {
-            color: #ff0000; /* YouTube red for active icon */
-        }
-
-        .sidebar li.active a {
-            color: #030303;
-            font-weight: 500;
-        }
-
-        /* Tab Content Styles */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
             display: block;
         }
 
-        /* Shorts Grid Styles */
-        .shorts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .shorts-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .shorts-thumbnail {
-            width: 100%;
-            aspect-ratio: 9/16; /* Vertical aspect ratio for shorts */
-            object-fit: cover;
-        }
-
-        .shorts-info {
-            padding: 12px;
-        }
-
-        .shorts-title {
-            font-size: 14px;
+        .stat-label {
+            color: var(--text-secondary);
             font-weight: 500;
-            margin-bottom: 5px;
+            margin-top: 0.5rem;
         }
 
-        .shorts-meta {
-            color: #606060;
-            font-size: 12px;
-        }
-
-        /* Playlists Grid Styles */
-        .playlists-grid {
+        /* Categories Section */
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
         }
 
-        .playlist-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .category-card {
+            background: white;
+            padding: 2rem 1rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .playlist-thumbnail-container {
-            position: relative;
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .playlist-thumbnail {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
-        .playlist-overlay {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.8);
+        .category-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
             color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
         }
 
-        .playlist-overlay i {
-            font-size: 10px;
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .playlist-info {
-            padding: 12px;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .playlist-title {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 5px;
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
-        .playlist-meta {
-            color: #606060;
-            font-size: 14px;
+        .footer-links {
+            list-style: none;
         }
 
-        /* Responsive design */
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-center {
-                display: none; /* Hide search bar on mobile */
+            .nav-menu {
+                display: none;
             }
 
-            .sidebar {
-                width: 100%;
-                transform: translateX(-100%);
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .main-content {
-                margin-left: 0;
+            .hero p {
+                font-size: 1.1rem;
             }
 
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
-            }
-
-            .shorts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 15px;
-            }
-
-            .playlists-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
-            }
-
-            .channel-info {
+            .search-container {
                 flex-direction: column;
-                text-align: center;
-                gap: 15px;
             }
 
-            .channel-avatar {
-                width: 80px;
-                height: 80px;
+            .search-filters {
+                justify-content: flex-start;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .video-grid {
-                grid-template-columns: 1fr;
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-            .shorts-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .playlists-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .channel-tabs {
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            .channel-tabs .tab {
-                display: inline-block;
-                white-space: nowrap;
-            }
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-left">
-            <div class="menu-icon"><i class="fas fa-bars"></i></div>
-            <div class="youtube-logo">
-                <img src="download (1).png" alt="YouTube Logo">
-                <span>YouTube</span>
-            </div>
-        </div>
-        <div class="header-center">
-            <div class="search-bar">
-                <input type="text" placeholder="Search">
-                <div class="search-clear"><i class="fas fa-times-circle"></i></div>
-                <button class="search-button"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="mic-icon"><i class="fas fa-microphone"></i></div>
-        </div>
-        <div class="header-right">
-            <div class="more-icon"><i class="fas fa-ellipsis-v"></i></div>
-            <button class="sign-in-button"><i class="fas fa-user-circle"></i> Sign in</button>
-        </div>
-    </header>
-    <div class="container">
-        <nav class="sidebar">
-            <ul>
-                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="#"><i class="fas fa-play-circle"></i>Shorts</a></li>
-                <li><a href="#"><i class="fas fa-youtube"></i>Subscriptions</a></li>
-                <hr>
-                <li><a href="#"><i class="fas fa-user"></i>You</a></li>
-                <li><a href="#"><i class="fas fa-history"></i>History</a></li>
-                <li><a href="#"><i class="fas fa-bars"></i>Playlists</a></li>
-                <li><a href="#"><i class="fas fa-video"></i>Your videos</a></li>
-                <li><a href="#"><i class="fas fa-clock"></i>Watch later</a></li>
-                <li><a href="#"><i class="fas fa-thumbs-up"></i>Liked videos</a></li>
-                <hr>
-                <li>Subscriptions</li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>PixelArtistry</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>AI Search</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>GothamChess</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>AxisAgile Apps</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>Tech With Tim</a></li>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-book-open"></i>
+                DigitalLibrary
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Browse</a></li>
+                <li><a href="#" class="nav-link">Collections</a></li>
+                <li><a href="#" class="nav-link">Research</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
             </ul>
-        </nav>
-
-        <div class="main-content">
-            <header class="channel-header">
-                <div class="channel-info">
-                    <img src="png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper-thumbnail (1).png" alt="Channel Avatar" class="channel-avatar">
-                    <div class="channel-details">
-                        <h1>Channel Name</h1>
-                        <p class="channel-description">This is a placeholder for the channel description. It can be a short summary of the channel's content.</p>
-                        <div class="channel-stats">
-                            <span>1.2M subscribers</span>
-                            <span>500 videos</span>
-                        </div>
-                    </div>
-                    <button class="subscribe-btn">Subscribe</button>
-                </div>
-            </header>
-
-            <div class="channel-tabs">
-                <div class="tab active">Home</div>
-                <div class="tab">Shorts</div>
-                <div class="tab">Playlists</div>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Sign In</a>
+                <a href="#" class="btn btn-primary">Join Now</a>
             </div>
+        </nav>
+    </header>
 
-            <main class="content-container">
-                <!-- Home Tab Content -->
-                <div id="home-content" class="tab-content active">
-                    <div class="video-grid">
-                        <!-- Video Card 1 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Amazing Video Title Goes Here</h3>
-                                <div class="video-meta">
-                                    <div>1.2M views • 2 days ago</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Card 2 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Another Great Video Title</h3>
-                                <div class="video-meta">
-                                    <div>800K views • 1 week ago</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Card 3 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Check Out This Awesome Content</h3>
-                                <div class="video-meta">
-                                    <div>500K views • 2 weeks ago</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Card 4 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Latest Upload - Must Watch!</h3>
-                                <div class="video-meta">
-                                    <div>300K views • 3 weeks ago</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Card 5 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Tutorial: How to Get Started</h3>
-                                <div class="video-meta">
-                                    <div>2.1M views • 1 month ago</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Card 6 -->
-                        <div class="video-card">
-                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                            <div class="video-info">
-                                <h3 class="video-title">Behind the Scenes Vlog</h3>
-                                <div class="video-meta">
-                                    <div>650K views • 1 month ago</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-section">
-                        <h2>About</h2>
-                        <p>Welcome to my channel! I create content about [your topic]. Subscribe to stay updated with the latest videos and join our growing community.</p>
-                        <br>
-                        <p>Join me on social media:</p>
-                        <p>Twitter: @channelname</p>
-                        <p>Instagram: @channelname</p>
-                        <p>Facebook: /channelname</p>
-                    </div>
-                </div>
-
-                <!-- Shorts Tab Content -->
-                <div id="shorts-content" class="tab-content">
-                    <div class="shorts-grid">
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">Quick Tip #1</h4>
-                                <div class="shorts-meta">2.5M views</div>
-                            </div>
-                        </div>
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">30 Second Tutorial</h4>
-                                <div class="shorts-meta">1.8M views</div>
-                            </div>
-                        </div>
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">Fun Facts You Didn't Know</h4>
-                                <div class="shorts-meta">3.2M views</div>
-                            </div>
-                        </div>
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">Life Hack Alert!</h4>
-                                <div class="shorts-meta">4.1M views</div>
-                            </div>
-                        </div>
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">Quick Review</h4>
-                                <div class="shorts-meta">890K views</div>
-                            </div>
-                        </div>
-                        <div class="shorts-card">
-                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
-                            <div class="shorts-info">
-                                <h4 class="shorts-title">Before & After</h4>
-                                <div class="shorts-meta">1.5M views</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Playlists Tab Content -->
-                <div id="playlists-content" class="tab-content">
-                    <div class="playlists-grid">
-                        <div class="playlist-card">
-                            <div class="playlist-thumbnail-container">
-                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
-                                <div class="playlist-overlay">
-                                    <i class="fas fa-play"></i>
-                                    <span>12 videos</span>
-                                </div>
-                            </div>
-                            <div class="playlist-info">
-                                <h4 class="playlist-title">Getting Started Series</h4>
-                                <div class="playlist-meta">12 videos • 2.5M total views</div>
-                            </div>
-                        </div>
-                        <div class="playlist-card">
-                            <div class="playlist-thumbnail-container">
-                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
-                                <div class="playlist-overlay">
-                                    <i class="fas fa-play"></i>
-                                    <span>8 videos</span>
-                                </div>
-                            </div>
-                            <div class="playlist-info">
-                                <h4 class="playlist-title">Advanced Tutorials</h4>
-                                <div class="playlist-meta">8 videos • 1.8M total views</div>
-                            </div>
-                        </div>
-                        <div class="playlist-card">
-                            <div class="playlist-thumbnail-container">
-                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
-                                <div class="playlist-overlay">
-                                    <i class="fas fa-play"></i>
-                                    <span>15 videos</span>
-                                </div>
-                            </div>
-                            <div class="playlist-info">
-                                <h4 class="playlist-title">Weekly Vlogs</h4>
-                                <div class="playlist-meta">15 videos • 3.2M total views</div>
-                            </div>
-                        </div>
-                        <div class="playlist-card">
-                            <div class="playlist-thumbnail-container">
-                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
-                                <div class="playlist-overlay">
-                                    <i class="fas fa-play"></i>
-                                    <span>6 videos</span>
-                                </div>
-                            </div>
-                            <div class="playlist-info">
-                                <h4 class="playlist-title">Product Reviews</h4>
-                                <div class="playlist-meta">6 videos • 950K total views</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="fade-in">Discover Knowledge Without Limits</h1>
+            <p class="fade-in">Access millions of books, articles, research papers, and multimedia resources from the world's largest digital library collection.</p>
         </div>
-    </div>
+    </section>
+
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Featured Books -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Books</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="card-title">The Art of Computer Programming</h3>
+                    <p class="card-subtitle">by Donald E. Knuth</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span><i class="fas fa-download"></i> 15.2K</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="card-title">Quantum Physics Fundamentals</h3>
+                    <p class="card-subtitle">by Dr. Sarah Chen</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-star"></i> 4.6</span>
+                        <span><i class="fas fa-download"></i> 8.7K</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="card-title">Machine Learning Patterns</h3>
+                    <p class="card-subtitle">by Prof. Michael Zhang</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                        <span><i class="fas fa-download"></i> 22.1K</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="card-title">Climate Change Research</h3>
+                    <p class="card-subtitle">by Dr. Emma Rodriguez</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-download"></i> 12.5K</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Browse by Category</h2>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="category-name">Technology</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="category-name">Science</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="category-name">Education</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="category-name">Health</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="category-name">Arts</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="category-name">Business</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">New Arrivals</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="card-title">Space Exploration 2024</h3>
+                    <p class="card-subtitle">by NASA Research Team</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-calendar"></i> 2 days ago</span>
+                        <span><i class="fas fa-eye"></i> 3.2K</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3 class="card-title">Genetic Engineering Ethics</h3>
+                    <p class="card-subtitle">by Dr. Lisa Park</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-calendar"></i> 5 days ago</span>
+                        <span><i class="fas fa-eye"></i> 1.8K</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="card-title">Cryptocurrency Fundamentals</h3>
+                    <p class="card-subtitle">by Prof. David Kim</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-calendar"></i> 1 week ago</span>
+                        <span><i class="fas fa-eye"></i> 5.7K</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="section">
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">2.5M+</span>
+                        <div class="stat-label">Books Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">850K+</span>
+                        <div class="stat-label">Research Papers</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1.2M+</span>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50K+</span>
+                        <div class="stat-label">Daily Downloads</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Digital Library</h3>
+                    <p>Empowering minds through unlimited access to knowledge and research.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Collections</a></li>
+                        <li><a href="#">Advanced Search</a></li>
+                        <li><a href="#">Research Tools</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Social Media</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Digital Library. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Navigation functionality
+        // Search functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const menuIcon = document.querySelector('.menu-icon');
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
-            let sidebarVisible = true;
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
 
-            menuIcon.addEventListener('click', function() {
-                if (sidebarVisible) {
-                    sidebar.style.transform = 'translateX(-100%)';
-                    mainContent.style.marginLeft = '0';
-                    sidebarVisible = false;
-                } else {
-                    sidebar.style.transform = 'translateX(0)';
-                    mainContent.style.marginLeft = '240px';
-                    sidebarVisible = true;
-                }
-            });
-
-            // Search functionality
-            const searchInput = document.querySelector('.search-bar input');
-            const searchClear = document.querySelector('.search-clear');
-            const searchButton = document.querySelector('.search-button');
-
-            searchInput.addEventListener('input', function() {
-                if (this.value.length > 0) {
-                    searchClear.style.display = 'flex';
-                } else {
-                    searchClear.style.display = 'none';
-                }
-            });
-
-            searchClear.addEventListener('click', function() {
-                searchInput.value = '';
-                searchClear.style.display = 'none';
-                searchInput.focus();
-            });
-
-            searchButton.addEventListener('click', function() {
-                const searchTerm = searchInput.value.trim();
+            // Search button click
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
                 if (searchTerm) {
-                    alert('Searching for: ' + searchTerm);
-                    // In a real application, you would implement actual search functionality here
+                    console.log('Searching for:', searchTerm);
+                    // Here you would implement actual search functionality
                 }
             });
 
+            // Enter key search
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
-                    searchButton.click();
+                    searchBtn.click();
                 }
             });
 
-            // Tab functionality
-            const tabs = document.querySelectorAll('.channel-tabs .tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabText = this.textContent.trim().toLowerCase();
-                    
-                    // Remove active class from all tabs
-                    tabs.forEach(t => t.classList.remove('active'));
-                    // Add active class to clicked tab
+            // Filter buttons
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // Hide all tab content
-                    tabContents.forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Show the corresponding tab content
-                    let targetContent;
-                    switch(tabText) {
-                        case 'home':
-                            targetContent = document.getElementById('home-content');
-                            break;
-                        case 'shorts':
-                            targetContent = document.getElementById('shorts-content');
-                            break;
-                        case 'playlists':
-                            targetContent = document.getElementById('playlists-content');
-                            break;
-                        default:
-                            targetContent = document.getElementById('home-content');
-                    }
-                    
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                    }
-                    
-                    console.log('Tab switched to:', tabText);
+                    console.log('Filter selected:', this.textContent);
                 });
             });
 
-            // Sidebar navigation
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+            // Card hover effects
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    console.log('Card clicked:', this.querySelector('.card-title').textContent);
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const linkText = this.textContent.trim();
-                    
-                    // Remove active state from all sidebar items
-                    sidebarLinks.forEach(l => l.parentElement.classList.remove('active'));
-                    // Add active state to clicked item
-                    this.parentElement.classList.add('active');
-                    
-                    console.log('Navigated to:', linkText);
-                    // In a real application, you would navigate to different pages or sections
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
-            // Sign in button
-            const signInButton = document.querySelector('.sign-in-button');
-            signInButton.addEventListener('click', function() {
-                alert('Sign in functionality would be implemented here');
-            });
+            // Add fade-in animation to elements as they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-            // Subscribe button
-            const subscribeButton = document.querySelector('.subscribe-btn');
-            subscribeButton.addEventListener('click', function() {
-                if (this.textContent === 'Subscribe') {
-                    this.textContent = 'Subscribed';
-                    this.style.backgroundColor = '#606060';
-                } else {
-                    this.textContent = 'Subscribe';
-                    this.style.backgroundColor = '#080808';
-                }
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('.section, .card').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
