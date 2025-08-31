@@ -342,6 +342,107 @@
             font-weight: 500;
         }
 
+        /* Tab Content Styles */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Shorts Grid Styles */
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .shorts-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .shorts-thumbnail {
+            width: 100%;
+            aspect-ratio: 9/16; /* Vertical aspect ratio for shorts */
+            object-fit: cover;
+        }
+
+        .shorts-info {
+            padding: 12px;
+        }
+
+        .shorts-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .shorts-meta {
+            color: #606060;
+            font-size: 12px;
+        }
+
+        /* Playlists Grid Styles */
+        .playlists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .playlist-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .playlist-thumbnail-container {
+            position: relative;
+        }
+
+        .playlist-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .playlist-overlay {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .playlist-overlay i {
+            font-size: 10px;
+        }
+
+        .playlist-info {
+            padding: 12px;
+        }
+
+        .playlist-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .playlist-meta {
+            color: #606060;
+            font-size: 14px;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .header-center {
@@ -362,6 +463,16 @@
                 gap: 15px;
             }
 
+            .shorts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .playlists-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
             .channel-info {
                 flex-direction: column;
                 text-align: center;
@@ -377,6 +488,16 @@
         @media (max-width: 480px) {
             .video-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .shorts-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .playlists-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .channel-tabs {
@@ -459,60 +580,191 @@
             </div>
 
             <main class="content-container">
-                <div class="video-grid">
-                    <!-- Video Card 1 -->
-                    <div class="video-card">
-                        <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                        <div class="video-info">
-                            <h3 class="video-title">Amazing Video Title Goes Here</h3>
-                            <div class="video-meta">
-                                <div>1.2M views • 2 days ago</div>
+                <!-- Home Tab Content -->
+                <div id="home-content" class="tab-content active">
+                    <div class="video-grid">
+                        <!-- Video Card 1 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Amazing Video Title Goes Here</h3>
+                                <div class="video-meta">
+                                    <div>1.2M views • 2 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 2 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Another Great Video Title</h3>
+                                <div class="video-meta">
+                                    <div>800K views • 1 week ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 3 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Check Out This Awesome Content</h3>
+                                <div class="video-meta">
+                                    <div>500K views • 2 weeks ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 4 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Latest Upload - Must Watch!</h3>
+                                <div class="video-meta">
+                                    <div>300K views • 3 weeks ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 5 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Tutorial: How to Get Started</h3>
+                                <div class="video-meta">
+                                    <div>2.1M views • 1 month ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 6 -->
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Behind the Scenes Vlog</h3>
+                                <div class="video-meta">
+                                    <div>650K views • 1 month ago</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Video Card 2 -->
-                    <div class="video-card">
-                        <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                        <div class="video-info">
-                            <h3 class="video-title">Another Great Video Title</h3>
-                            <div class="video-meta">
-                                <div>800K views • 1 week ago</div>
+                    <div class="about-section">
+                        <h2>About</h2>
+                        <p>Welcome to my channel! I create content about [your topic]. Subscribe to stay updated with the latest videos and join our growing community.</p>
+                        <br>
+                        <p>Join me on social media:</p>
+                        <p>Twitter: @channelname</p>
+                        <p>Instagram: @channelname</p>
+                        <p>Facebook: /channelname</p>
+                    </div>
+                </div>
+
+                <!-- Shorts Tab Content -->
+                <div id="shorts-content" class="tab-content">
+                    <div class="shorts-grid">
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Quick Tip #1</h4>
+                                <div class="shorts-meta">2.5M views</div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Video Card 3 -->
-                    <div class="video-card">
-                        <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                        <div class="video-info">
-                            <h3 class="video-title">Check Out This Awesome Content</h3>
-                            <div class="video-meta">
-                                <div>500K views • 2 weeks ago</div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">30 Second Tutorial</h4>
+                                <div class="shorts-meta">1.8M views</div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Video Card 4 -->
-                    <div class="video-card">
-                        <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
-                        <div class="video-info">
-                            <h3 class="video-title">Latest Upload - Must Watch!</h3>
-                            <div class="video-meta">
-                                <div>300K views • 3 weeks ago</div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Fun Facts You Didn't Know</h4>
+                                <div class="shorts-meta">3.2M views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Life Hack Alert!</h4>
+                                <div class="shorts-meta">4.1M views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Quick Review</h4>
+                                <div class="shorts-meta">890K views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Before & After</h4>
+                                <div class="shorts-meta">1.5M views</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="about-section">
-                    <h2>About</h2>
-                    <p>Welcome to my channel! I create content about [your topic]. Subscribe to stay updated with the latest videos and join our growing community.</p>
-                    <br>
-                    <p>Join me on social media:</p>
-                    <p>Twitter: @channelname</p>
-                    <p>Instagram: @channelname</p>
-                    <p>Facebook: /channelname</p>
+                <!-- Playlists Tab Content -->
+                <div id="playlists-content" class="tab-content">
+                    <div class="playlists-grid">
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>12 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Getting Started Series</h4>
+                                <div class="playlist-meta">12 videos • 2.5M total views</div>
+                            </div>
+                        </div>
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>8 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Advanced Tutorials</h4>
+                                <div class="playlist-meta">8 videos • 1.8M total views</div>
+                            </div>
+                        </div>
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>15 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Weekly Vlogs</h4>
+                                <div class="playlist-meta">15 videos • 3.2M total views</div>
+                            </div>
+                        </div>
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>6 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Product Reviews</h4>
+                                <div class="playlist-meta">6 videos • 950K total views</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -574,15 +826,43 @@
 
             // Tab functionality
             const tabs = document.querySelectorAll('.channel-tabs .tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
+                    const tabText = this.textContent.trim().toLowerCase();
+                    
                     // Remove active class from all tabs
                     tabs.forEach(t => t.classList.remove('active'));
                     // Add active class to clicked tab
                     this.classList.add('active');
                     
-                    // Here you would typically show/hide content based on the selected tab
-                    console.log('Tab switched to:', this.textContent);
+                    // Hide all tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show the corresponding tab content
+                    let targetContent;
+                    switch(tabText) {
+                        case 'home':
+                            targetContent = document.getElementById('home-content');
+                            break;
+                        case 'shorts':
+                            targetContent = document.getElementById('shorts-content');
+                            break;
+                        case 'playlists':
+                            targetContent = document.getElementById('playlists-content');
+                            break;
+                        default:
+                            targetContent = document.getElementById('home-content');
+                    }
+                    
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                    
+                    console.log('Tab switched to:', tabText);
                 });
             });
 
