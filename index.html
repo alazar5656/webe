@@ -367,6 +367,211 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* Tab System */
+        .tab-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: white;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .tab-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .tab-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Search Bar for Browse Tab */
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            min-width: 250px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--text-secondary);
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Research Tools */
+        .research-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .tool-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
@@ -397,6 +602,23 @@
 
             .cards-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .tab-nav {
+                padding: 0.25rem;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input {
+                min-width: auto;
             }
         }
 
@@ -449,153 +671,90 @@
 
 
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Featured Books -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Featured Books</h2>
-                <a href="#" class="view-all">View All →</a>
-            </div>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3 class="card-title">The Art of Computer Programming</h3>
-                    <p class="card-subtitle">by Donald E. Knuth</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-star"></i> 4.8</span>
-                        <span><i class="fas fa-download"></i> 15.2K</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-microscope"></i>
-                    </div>
-                    <h3 class="card-title">Quantum Physics Fundamentals</h3>
-                    <p class="card-subtitle">by Dr. Sarah Chen</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-star"></i> 4.6</span>
-                        <span><i class="fas fa-download"></i> 8.7K</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="card-title">Machine Learning Patterns</h3>
-                    <p class="card-subtitle">by Prof. Michael Zhang</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-star"></i> 4.9</span>
-                        <span><i class="fas fa-download"></i> 22.1K</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3 class="card-title">Climate Change Research</h3>
-                    <p class="card-subtitle">by Dr. Emma Rodriguez</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-star"></i> 4.7</span>
-                        <span><i class="fas fa-download"></i> 12.5K</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Tab System -->
+    <main class="tab-container">
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="home">
+                <i class="fas fa-home"></i>
+                Home
+            </button>
+            <button class="tab-button" data-tab="browse">
+                <i class="fas fa-search"></i>
+                Browse
+            </button>
+            <button class="tab-button" data-tab="collections">
+                <i class="fas fa-layer-group"></i>
+                Collections
+            </button>
+            <button class="tab-button" data-tab="research">
+                <i class="fas fa-microscope"></i>
+                Research
+            </button>
+            <button class="tab-button" data-tab="about">
+                <i class="fas fa-info-circle"></i>
+                About
+            </button>
+        </div>
 
-        <!-- Categories -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Browse by Category</h2>
-            </div>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div class="category-name">Technology</div>
+        <!-- Home Tab Content -->
+        <div class="tab-content active" id="home">
+            <!-- Featured Books -->
+            <section class="tab-section">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Books</h2>
+                    <a href="#" class="view-all">View All →</a>
                 </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-flask"></i>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="card-title">The Art of Computer Programming</h3>
+                        <p class="card-subtitle">by Donald E. Knuth</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-star"></i> 4.8</span>
+                            <span><i class="fas fa-download"></i> 15.2K</span>
+                        </div>
                     </div>
-                    <div class="category-name">Science</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="card-title">Quantum Physics Fundamentals</h3>
+                        <p class="card-subtitle">by Dr. Sarah Chen</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-star"></i> 4.6</span>
+                            <span><i class="fas fa-download"></i> 8.7K</span>
+                        </div>
                     </div>
-                    <div class="category-name">Education</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-heartbeat"></i>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="card-title">Machine Learning Patterns</h3>
+                        <p class="card-subtitle">by Prof. Michael Zhang</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-star"></i> 4.9</span>
+                            <span><i class="fas fa-download"></i> 22.1K</span>
+                        </div>
                     </div>
-                    <div class="category-name">Health</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-palette"></i>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="card-title">Climate Change Research</h3>
+                        <p class="card-subtitle">by Dr. Emma Rodriguez</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-star"></i> 4.7</span>
+                            <span><i class="fas fa-download"></i> 12.5K</span>
+                        </div>
                     </div>
-                    <div class="category-name">Arts</div>
                 </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="category-name">Business</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- New Arrivals -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">New Arrivals</h2>
-                <a href="#" class="view-all">View All →</a>
-            </div>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="card-title">Space Exploration 2024</h3>
-                    <p class="card-subtitle">by NASA Research Team</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-calendar"></i> 2 days ago</span>
-                        <span><i class="fas fa-eye"></i> 3.2K</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-dna"></i>
-                    </div>
-                    <h3 class="card-title">Genetic Engineering Ethics</h3>
-                    <p class="card-subtitle">by Dr. Lisa Park</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-calendar"></i> 5 days ago</span>
-                        <span><i class="fas fa-eye"></i> 1.8K</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3 class="card-title">Cryptocurrency Fundamentals</h3>
-                    <p class="card-subtitle">by Prof. David Kim</p>
-                    <div class="card-meta">
-                        <span><i class="fas fa-calendar"></i> 1 week ago</span>
-                        <span><i class="fas fa-eye"></i> 5.7K</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Statistics -->
-        <section class="section">
-            <div class="stats-section">
+            <!-- Statistics -->
+            <section class="tab-section">
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-number">2.5M+</span>
@@ -614,8 +773,234 @@
                         <div class="stat-label">Daily Downloads</div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
+        <!-- Browse Tab Content -->
+        <div class="tab-content" id="browse">
+            <section class="tab-section">
+                <h2>Browse Library</h2>
+                <p>Search through our vast collection of books, articles, and research papers.</p>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search books, authors, topics...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+
+                <div class="search-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Books</button>
+                    <button class="filter-btn">Articles</button>
+                    <button class="filter-btn">Research</button>
+                    <button class="filter-btn">Audio</button>
+                    <button class="filter-btn">Video</button>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="category-name">Technology</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="category-name">Science</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="category-name">Education</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="category-name">Health</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="category-name">Arts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="category-name">Business</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Collections Tab Content -->
+        <div class="tab-content" id="collections">
+            <section class="tab-section">
+                <h2>Special Collections</h2>
+                <p>Curated collections of premium content organized by theme and expertise.</p>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="card-title">Premium Academic Collection</h3>
+                        <p class="card-subtitle">Peer-reviewed research papers</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-book"></i> 15,000 papers</span>
+                            <span><i class="fas fa-users"></i> Verified</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3 class="card-title">Historical Archives</h3>
+                        <p class="card-subtitle">Rare manuscripts and documents</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-book"></i> 5,200 items</span>
+                            <span><i class="fas fa-lock"></i> Exclusive</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="card-title">Student Resources</h3>
+                        <p class="card-subtitle">Textbooks and study materials</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-book"></i> 25,000 books</span>
+                            <span><i class="fas fa-graduation-cap"></i> Academic</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Research Tab Content -->
+        <div class="tab-content" id="research">
+            <section class="tab-section">
+                <h2>Research Tools & Resources</h2>
+                <p>Advanced tools and databases for researchers and academics.</p>
+                
+                <div class="research-tools">
+                    <div class="tool-card">
+                        <h4>Citation Generator</h4>
+                        <p>Generate accurate citations in APA, MLA, Chicago, and other formats.</p>
+                        <button class="tool-btn">Launch Tool</button>
+                    </div>
+                    <div class="tool-card">
+                        <h4>Research Database</h4>
+                        <p>Access peer-reviewed journals and academic publications.</p>
+                        <button class="tool-btn">Browse Database</button>
+                    </div>
+                    <div class="tool-card">
+                        <h4>Collaboration Hub</h4>
+                        <p>Connect with researchers and collaborate on projects.</p>
+                        <button class="tool-btn">Join Hub</button>
+                    </div>
+                    <div class="tool-card">
+                        <h4>Statistics Analyzer</h4>
+                        <p>Analyze research data with built-in statistical tools.</p>
+                        <button class="tool-btn">Open Analyzer</button>
+                    </div>
+                </div>
+
+                <!-- New Arrivals in Research -->
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3>Latest Research Papers</h3>
+                </div>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="card-title">Space Exploration 2024</h3>
+                        <p class="card-subtitle">by NASA Research Team</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-calendar"></i> 2 days ago</span>
+                            <span><i class="fas fa-eye"></i> 3.2K</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3 class="card-title">Genetic Engineering Ethics</h3>
+                        <p class="card-subtitle">by Dr. Lisa Park</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-calendar"></i> 5 days ago</span>
+                            <span><i class="fas fa-eye"></i> 1.8K</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="card-title">Cryptocurrency Fundamentals</h3>
+                        <p class="card-subtitle">by Prof. David Kim</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-calendar"></i> 1 week ago</span>
+                            <span><i class="fas fa-eye"></i> 5.7K</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Tab Content -->
+        <div class="tab-content" id="about">
+            <section class="tab-section">
+                <h2>About Digital Library</h2>
+                <p>We're dedicated to providing unlimited access to knowledge and research resources for students, researchers, and lifelong learners worldwide.</p>
+                
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h4>Global Access</h4>
+                        <p>Serving millions of users across 150+ countries with 24/7 availability.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Trusted Content</h4>
+                        <p>All resources are verified, peer-reviewed, and sourced from reputable institutions.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Community Driven</h4>
+                        <p>Built by and for the academic and research community with collaborative features.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Innovation First</h4>
+                        <p>Cutting-edge search technology and AI-powered research assistance tools.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <h3>Our Mission</h3>
+                    <p style="max-width: 600px; margin: 1rem auto; font-size: 1.1rem;">
+                        To democratize access to knowledge by creating the world's most comprehensive and user-friendly digital library platform, empowering researchers, students, and curious minds to discover, learn, and innovate.
+                    </p>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -661,42 +1046,112 @@
     </footer>
 
     <script>
-        // Search functionality
+        // Tab system functionality
         document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
             const searchInput = document.querySelector('.search-input');
             const searchBtn = document.querySelector('.search-btn');
             const filterBtns = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.card');
 
-            // Search button click
-            searchBtn.addEventListener('click', function() {
-                const searchTerm = searchInput.value.toLowerCase();
-                if (searchTerm) {
-                    console.log('Searching for:', searchTerm);
-                    // Here you would implement actual search functionality
+            // Tab switching functionality
+            function switchTab(targetTabId) {
+                // Remove active class from all tab buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                const targetButton = document.querySelector(`[data-tab="${targetTabId}"]`);
+                const targetContent = document.getElementById(targetTabId);
+                
+                if (targetButton && targetContent) {
+                    targetButton.classList.add('active');
+                    targetContent.classList.add('active');
                 }
+            }
+
+            // Add click event listeners to tab buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
             });
 
+            // Search functionality
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    if (searchTerm) {
+                        console.log('Searching for:', searchTerm);
+                        // Here you would implement actual search functionality
+                        // For demo purposes, let's show an alert
+                        alert(`Searching for: "${searchTerm}"`);
+                    }
+                });
+            }
+
             // Enter key search
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchBtn.click();
-                }
-            });
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchBtn.click();
+                    }
+                });
+            }
 
             // Filter buttons
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Remove active from all filter buttons in the same container
+                    const container = this.parentElement;
+                    const siblingFilters = container.querySelectorAll('.filter-btn');
+                    siblingFilters.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active to clicked button
                     this.classList.add('active');
                     console.log('Filter selected:', this.textContent);
                 });
             });
 
-            // Card hover effects
+            // Card click effects
             cards.forEach(card => {
                 card.addEventListener('click', function() {
-                    console.log('Card clicked:', this.querySelector('.card-title').textContent);
+                    const title = this.querySelector('.card-title');
+                    if (title) {
+                        console.log('Card clicked:', title.textContent);
+                        // Add visual feedback
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+
+            // Tool button functionality
+            document.querySelectorAll('.tool-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const toolName = this.parentElement.querySelector('h4').textContent;
+                    alert(`Launching ${toolName}...`);
+                });
+            });
+
+            // Category card clicks
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryName = this.querySelector('.category-name').textContent;
+                    console.log('Category selected:', categoryName);
+                    // Switch to browse tab and simulate category filter
+                    switchTab('browse');
+                    // Highlight the category
+                    this.style.background = 'var(--primary-color)';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.style.background = '';
+                        this.style.color = '';
+                    }, 1000);
                 });
             });
 
@@ -727,10 +1182,16 @@
                 });
             }, observerOptions);
 
-            // Observe all sections
-            document.querySelectorAll('.section, .card').forEach(el => {
+            // Observe all sections and cards
+            document.querySelectorAll('.tab-section, .card').forEach(el => {
                 observer.observe(el);
             });
+
+            // Initialize first tab as active (if none are active)
+            const hasActiveTab = document.querySelector('.tab-button.active');
+            if (!hasActiveTab && tabButtons.length > 0) {
+                switchTab('home');
+            }
         });
     </script>
 </body>
