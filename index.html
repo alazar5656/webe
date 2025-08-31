@@ -342,6 +342,33 @@
             font-weight: 500;
         }
 
+        /* Navigation Section Styles */
+        .navigation-section {
+            display: none;
+        }
+
+        .navigation-section.active {
+            display: block;
+        }
+
+        .section-header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .section-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #030303;
+        }
+
+        .section-header p {
+            color: #606060;
+            font-size: 14px;
+        }
+
         /* Tab Content Styles */
         .tab-content {
             display: none;
@@ -537,47 +564,49 @@
     <div class="container">
         <nav class="sidebar">
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="#"><i class="fas fa-play-circle"></i>Shorts</a></li>
-                <li><a href="#"><i class="fas fa-youtube"></i>Subscriptions</a></li>
+                <li class="active"><a href="#" data-section="home"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#" data-section="shorts"><i class="fas fa-play-circle"></i>Shorts</a></li>
+                <li><a href="#" data-section="subscriptions"><i class="fas fa-youtube"></i>Subscriptions</a></li>
                 <hr>
-                <li><a href="#"><i class="fas fa-user"></i>You</a></li>
-                <li><a href="#"><i class="fas fa-history"></i>History</a></li>
-                <li><a href="#"><i class="fas fa-bars"></i>Playlists</a></li>
-                <li><a href="#"><i class="fas fa-video"></i>Your videos</a></li>
-                <li><a href="#"><i class="fas fa-clock"></i>Watch later</a></li>
-                <li><a href="#"><i class="fas fa-thumbs-up"></i>Liked videos</a></li>
+                <li><a href="#" data-section="you"><i class="fas fa-user"></i>You</a></li>
+                <li><a href="#" data-section="history"><i class="fas fa-history"></i>History</a></li>
+                <li><a href="#" data-section="playlists"><i class="fas fa-bars"></i>Playlists</a></li>
+                <li><a href="#" data-section="your-videos"><i class="fas fa-video"></i>Your videos</a></li>
+                <li><a href="#" data-section="watch-later"><i class="fas fa-clock"></i>Watch later</a></li>
+                <li><a href="#" data-section="liked-videos"><i class="fas fa-thumbs-up"></i>Liked videos</a></li>
                 <hr>
                 <li>Subscriptions</li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>PixelArtistry</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>AI Search</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>GothamChess</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>AxisAgile Apps</a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i>Tech With Tim</a></li>
+                <li><a href="#" data-section="channel" data-channel="pixelartistry"><i class="fas fa-user-circle"></i>PixelArtistry</a></li>
+                <li><a href="#" data-section="channel" data-channel="aisearch"><i class="fas fa-user-circle"></i>AI Search</a></li>
+                <li><a href="#" data-section="channel" data-channel="gothamchess"><i class="fas fa-user-circle"></i>GothamChess</a></li>
+                <li><a href="#" data-section="channel" data-channel="axisagile"><i class="fas fa-user-circle"></i>AxisAgile Apps</a></li>
+                <li><a href="#" data-section="channel" data-channel="techwithtime"><i class="fas fa-user-circle"></i>Tech With Tim</a></li>
             </ul>
         </nav>
 
         <div class="main-content">
-            <header class="channel-header">
-                <div class="channel-info">
-                    <img src="png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper-thumbnail (1).png" alt="Channel Avatar" class="channel-avatar">
-                    <div class="channel-details">
-                        <h1>Channel Name</h1>
-                        <p class="channel-description">This is a placeholder for the channel description. It can be a short summary of the channel's content.</p>
-                        <div class="channel-stats">
-                            <span>1.2M subscribers</span>
-                            <span>500 videos</span>
+            <!-- Home Section -->
+            <div id="home-section" class="navigation-section active">
+                <header class="channel-header">
+                    <div class="channel-info">
+                        <img src="png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper-thumbnail (1).png" alt="Channel Avatar" class="channel-avatar">
+                        <div class="channel-details">
+                            <h1>Channel Name</h1>
+                            <p class="channel-description">This is a placeholder for the channel description. It can be a short summary of the channel's content.</p>
+                            <div class="channel-stats">
+                                <span>1.2M subscribers</span>
+                                <span>500 videos</span>
+                            </div>
                         </div>
+                        <button class="subscribe-btn">Subscribe</button>
                     </div>
-                    <button class="subscribe-btn">Subscribe</button>
-                </div>
-            </header>
+                </header>
 
-            <div class="channel-tabs">
-                <div class="tab active">Home</div>
-                <div class="tab">Shorts</div>
-                <div class="tab">Playlists</div>
-            </div>
+                <div class="channel-tabs">
+                    <div class="tab active">Home</div>
+                    <div class="tab">Shorts</div>
+                    <div class="tab">Playlists</div>
+                </div>
 
             <main class="content-container">
                 <!-- Home Tab Content -->
@@ -767,6 +796,214 @@
                     </div>
                 </div>
             </main>
+            </div>
+
+            <!-- Shorts Section -->
+            <div id="shorts-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Shorts</h1>
+                    <p>Quick, fun videos under 60 seconds</p>
+                </div>
+                <main class="content-container">
+                    <div class="shorts-grid">
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Quick Tip #1</h4>
+                                <div class="shorts-meta">2.5M views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">30 Second Tutorial</h4>
+                                <div class="shorts-meta">1.8M views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Fun Facts You Didn't Know</h4>
+                                <div class="shorts-meta">3.2M views</div>
+                            </div>
+                        </div>
+                        <div class="shorts-card">
+                            <img src="download.png" alt="Short Video" class="shorts-thumbnail">
+                            <div class="shorts-info">
+                                <h4 class="shorts-title">Life Hack Alert!</h4>
+                                <div class="shorts-meta">4.1M views</div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Subscriptions Section -->
+            <div id="subscriptions-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Subscriptions</h1>
+                    <p>Latest videos from channels you subscribe to</p>
+                </div>
+                <main class="content-container">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">PixelArtistry: Digital Art Tutorial</h3>
+                                <div class="video-meta">
+                                    <div>500K views • 1 day ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">GothamChess: Queen's Gambit Explained</h3>
+                                <div class="video-meta">
+                                    <div>1.2M views • 2 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Tech With Tim: Python Tips</h3>
+                                <div class="video-meta">
+                                    <div>800K views • 3 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- History Section -->
+            <div id="history-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Watch History</h1>
+                    <p>Videos you've watched recently</p>
+                </div>
+                <main class="content-container">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">How to Build a Website - Full Tutorial</h3>
+                                <div class="video-meta">
+                                    <div>Watched yesterday • 45 minutes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">JavaScript Basics for Beginners</h3>
+                                <div class="video-meta">
+                                    <div>Watched 2 days ago • 30 minutes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Playlists Section -->
+            <div id="playlists-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Your Playlists</h1>
+                    <p>Collections you've created and saved</p>
+                </div>
+                <main class="content-container">
+                    <div class="playlists-grid">
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>25 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Coding Tutorials</h4>
+                                <div class="playlist-meta">25 videos • Created by you</div>
+                            </div>
+                        </div>
+                        <div class="playlist-card">
+                            <div class="playlist-thumbnail-container">
+                                <img src="download.png" alt="Playlist" class="playlist-thumbnail">
+                                <div class="playlist-overlay">
+                                    <i class="fas fa-play"></i>
+                                    <span>12 videos</span>
+                                </div>
+                            </div>
+                            <div class="playlist-info">
+                                <h4 class="playlist-title">Music Mix</h4>
+                                <div class="playlist-meta">12 videos • Created by you</div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Watch Later Section -->
+            <div id="watch-later-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Watch Later</h1>
+                    <p>Videos you've saved to watch later</p>
+                </div>
+                <main class="content-container">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Advanced React Patterns</h3>
+                                <div class="video-meta">
+                                    <div>Added 3 days ago • 1.2M views</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">CSS Grid Complete Guide</h3>
+                                <div class="video-meta">
+                                    <div>Added 1 week ago • 800K views</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Liked Videos Section -->
+            <div id="liked-videos-section" class="navigation-section">
+                <div class="section-header">
+                    <h1>Liked Videos</h1>
+                    <p>Videos you've given a thumbs up</p>
+                </div>
+                <main class="content-container">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Funny Cat Compilation</h3>
+                                <div class="video-meta">
+                                    <div>Liked 2 days ago • 5.2M views</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <img src="download.png" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="video-info">
+                                <h3 class="video-title">Amazing Nature Documentary</h3>
+                                <div class="video-meta">
+                                    <div>Liked 1 week ago • 2.1M views</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
     </div>
 
@@ -867,10 +1104,13 @@
             });
 
             // Sidebar navigation
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            const sidebarLinks = document.querySelectorAll('.sidebar a[data-section]');
+            const navigationSections = document.querySelectorAll('.navigation-section');
+            
             sidebarLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const section = this.getAttribute('data-section');
                     const linkText = this.textContent.trim();
                     
                     // Remove active state from all sidebar items
@@ -878,8 +1118,56 @@
                     // Add active state to clicked item
                     this.parentElement.classList.add('active');
                     
-                    console.log('Navigated to:', linkText);
-                    // In a real application, you would navigate to different pages or sections
+                    // Hide all navigation sections
+                    navigationSections.forEach(navSection => {
+                        navSection.classList.remove('active');
+                    });
+                    
+                    // Show the corresponding section
+                    let targetSection;
+                    switch(section) {
+                        case 'home':
+                            targetSection = document.getElementById('home-section');
+                            break;
+                        case 'shorts':
+                            targetSection = document.getElementById('shorts-section');
+                            break;
+                        case 'subscriptions':
+                            targetSection = document.getElementById('subscriptions-section');
+                            break;
+                        case 'history':
+                            targetSection = document.getElementById('history-section');
+                            break;
+                        case 'playlists':
+                            targetSection = document.getElementById('playlists-section');
+                            break;
+                        case 'watch-later':
+                            targetSection = document.getElementById('watch-later-section');
+                            break;
+                        case 'liked-videos':
+                            targetSection = document.getElementById('liked-videos-section');
+                            break;
+                        case 'you':
+                            // Show a placeholder for "You" section
+                            alert('Your channel page would be shown here');
+                            return;
+                        case 'your-videos':
+                            // Show a placeholder for "Your videos" section
+                            alert('Your uploaded videos would be shown here');
+                            return;
+                        case 'channel':
+                            const channelName = this.getAttribute('data-channel');
+                            alert(`${linkText} channel page would be shown here`);
+                            return;
+                        default:
+                            targetSection = document.getElementById('home-section');
+                    }
+                    
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    console.log('Navigated to:', linkText, 'Section:', section);
                 });
             });
 
